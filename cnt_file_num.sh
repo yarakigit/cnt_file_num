@@ -8,10 +8,10 @@ dirname="$(cd -- "$(dirname -- "$1")" && pwd)" || exit $?
 abspath="${dirname%/}/$(basename -- "$1")"
 #echo $dirname $abspath
 if test -z $2 ; then
-    file_num=`find $abspath -type f | wc -l`
+    file_num=`find $abspath -maxdepth 1 -type f | wc -l`
 else
     #echo "keyword :" $2
-    file_num=`find $abspath -type f | xargs -I {} basename {} | grep $2 | wc -l`
+    file_num=`find $abspath -maxdepth 1 -type f | xargs -I {} basename {} | grep $2 | wc -l`
 fi
 #echo "file num :"$file_num
 echo $file_num
